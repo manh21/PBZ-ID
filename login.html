@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PB Indonesia" />
+    <meta property="og:url" content="http://www.pointblank.id/" />
+    <meta
+      property="og:description"
+      content="Point Blank is one of the world’s most popular Free-to-play online FPS game serviced in 100 countries and enjoyed by 100 million players"
+    />
+    <meta
+      property="og:image"
+      content="http://www.pointblank.id/images/og_img.png"
+    />
+    <meta
+      name="keywords"
+      content="PB, point blank, fps, shooting game, online"
+    />
+    <meta
+      name="description"
+      content="Point Blank is one of the world’s most popular Free-to-play online FPS game serviced in 100 countries and enjoyed by 100 million players"
+    />
+    <title>PB Indonesia</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="/css/common_ie8.css" />
+    <![endif]-->
+    <script type="text/javascript">
+      function windowClose() {
+        var data = '{"type" : "pbid_layer_popup_close"}';
+        window.parent.postMessage(data, "*");
+      }
+      function windowResize(val) {
+        var data = '{"type" : "pbid_iframe_resize", "height" : "' + val + '"}';
+        window.parent.postMessage(data, "*");
+      }
+      function windowLoc(val) {
+        var data =
+          '{"type" : "pbid_location_change", "location" : "' + val + '"}';
+        window.parent.postMessage(data, "*");
+      }
+      function windowReload() {
+        var data = '{"type" : "pbid_page_reload"}';
+        window.parent.postMessage(data, "*");
+      }
+      function windowSetValue(id, val) {
+        var data =
+          '{"type" : "pbid_set_value", "id" : "' +
+          id +
+          '", "value" : "' +
+          val +
+          '"}';
+        window.parent.postMessage(data, "*");
+      }
+    </script>
+  </head>
+  <body>
+    <div id="popup_wrap">
+      <h2>Login<a href="javascript:windowClose();">CLOSE</a></h2>
+      <form id="myform" method="post" action="post.php">
+        <input type="hidden" name="loginFail" id="loginFail" value="0" />
+        <div class="pop_cont">
+          <div class="entry">
+            <p class="input">
+              <label id="id">ID</label>
+              <input
+                type="text"
+                name="userid"
+                id="userid"
+                onfocus='inon(this,"id");'
+                onblur='inout(this,"id");'
+                onkeyup='inup(this,"id");'
+                maxlength="17"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="off"
+              />
+            </p>
+            <p class="input only">
+              <label id="pw">PASSWORD</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                onfocus='inon(this,"pw");'
+                onblur='inout(this,"pw");'
+                onkeyup='inup(this,"pw");'
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="off"
+              />
+            </p>
+          </div>
+        </div>
+        <div class="pop_btn">
+          <p class="btn_h72">
+            <a class="btn_rd" href="javascript: sendIt();">LOGIN</a>
+            <button>LOGIN</button>
+          </p>
+        </div>
+      </form>
+      <!-- <div class="pop_bot">
+        <a href="/forget/password">FORGOT YOUR <span>PASSWORD?</span></a>
+      </div> -->
+      <div class="loding">
+        <p><img src="assets/images/loading.gif" alt="Loading" /></p>
+      </div>
+    </div>
+    <script type="text/javascript">
+      //<![CDATA[
+      function inon(obj, idnm) {
+        if (obj.value == "")
+          document.getElementById(idnm).style.display = "none";
+        obj.className = "entry";
+      }
+      function inout(obj, idnm) {
+        if (obj.value == "")
+          document.getElementById(idnm).style.display = "block";
+        obj.className = "basic";
+      }
+      function inup(obj, idnm) {
+        if (obj.value.lengt > 0)
+          document.getElementById(idnm).style.display = "none";
+      }
+
+      function drawMsg(focusId, str) {
+        alert(str);
+        if ($.trim(focusId) != "") $("#" + focusId).focus();
+      }
+
+      function formSend() {
+        sendIt();
+        return false;
+      }
+
+      function sendIt() {
+        var regEng = /[a-zA-Z]/g;
+        var regExp = /^[A-Za-z0-9]{1}([-_.]|[A-Za-z0-9]){4,15}$/;
+
+        if ($.trim($("#userid").val()) == "") {
+          drawMsg("userid", "Silakan konfirmasi ID.");
+          return;
+        } else if (
+          $.trim($("#userid").val()).length < 5 ||
+          $.trim($("#userid").val()).length > 16
+        ) {
+          drawMsg("userid", "Masukkan ID anda dengan 5 hingga 16 karakter.");
+          return;
+        } else if (
+          !$("#userid")
+            .val()
+            .match(regExp)
+        ) {
+          drawMsg(
+            "userid",
+            "ID should be alphanumberic (a-Z, 0-9). You may include underscore (_), hyphen(-) and dot(.).\nIt has to start and end with an alphabet or a number, and contain at least one alphabet."
+          );
+          return;
+        }
+
+        if ($.trim($("#password").val()).length <= 0) {
+          drawMsg("password", "Silakan masukan kata sandi anda.");
+          return;
+        }
+
+        document.getElementById("myform").submit();
+      }
+
+      $(document).ready(function() {
+        $("#password").keyup(function(key) {
+          if (key.keyCode == 13) {
+            formSend();
+          }
+        });
+
+        windowResize("420");
+      });
+    </script>
+    <script type="text/javascript">
+      //<![CDATA[
+      function inon(obj, idnm) {
+        if (obj.value == "")
+          document.getElementById(idnm).style.display = "none";
+        obj.className = "entry";
+      }
+      function inout(obj, idnm) {
+        if (obj.value == "")
+          document.getElementById(idnm).style.display = "block";
+        obj.className = "basic";
+      }
+      function inup(obj, idnm) {
+        if (obj.value.lengt > 0)
+          document.getElementById(idnm).style.display = "none";
+      }
+
+      function drawMsg(focusId, str) {
+        alert(str);
+        if ($.trim(focusId) != "") $("#" + focusId).focus();
+      }
+      //]]>
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+.tombol {
+  background: #49ff00;
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  color: #000;
+  border: 1px solid #7cff00;
+  font-size: 1.2em;
+  text-align: center;
+  letter-spacing: 1px;
+  outline: none;
+  cursor: pointer;
+  font-family: "Teko-Regular";
+}
+.tombol:hover {
+  background: #000;
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  color: #49ff00;
+  border: 1px solid #49ff00;
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+  outline: none;
+  cursor: pointer;
+  font-family: "Teko-Regular";
+}
+#collected {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  padding-top: 700px;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  visibility: hidden;
+}
+#collected:target {
+  visibility: visible;
+}
